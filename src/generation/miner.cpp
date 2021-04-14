@@ -448,7 +448,7 @@ std::unique_ptr<CBlockTemplate> BlockAssembler::CreateNewBlock(CBlockIndex* pPar
     // Insert the height into the coinbase (to ensure all coinbase transactions have a unique hash)
     // Further, also insert any optional 'signature' data (identifier of miner or other private miner data etc.)
     std::string coinbaseSignature = GetArg("-coinbasesignature", "");
-    if (bSegSigIsEnabled)
+    if (bSegSigIsEnabled || IsArgSet("-regtest"))
     {
         coinbaseTx.vin[0].segregatedSignatureData.stack.clear();
         coinbaseTx.vin[0].segregatedSignatureData.stack.push_back(std::vector<unsigned char>());
